@@ -1,11 +1,11 @@
-$:.unshift(File.dirname(__FILE__) + '/../lib')
-$:.unshift(File.dirname(__FILE__) + '/../../rspec/lib')
-
+$:.unshift(File.dirname(__FILE__) + '/../../lib')
+$:.unshift(File.dirname(__FILE__) + '/../../../rspec/lib')
+ 
 require 'rubygems'
 require 'active_record'
 gem 'sqlite3-ruby'
 
-require File.dirname(__FILE__) + '/../init'
+require File.dirname(__FILE__) + '/../../init'
 require 'spec'
   
 ActiveRecord::Base.logger = Logger.new('/tmp/dj.log')
@@ -33,9 +33,8 @@ ActiveRecord::Schema.define do
 
 end
 
-
-# Purely useful for test cases...
 class Story < ActiveRecord::Base
+
   def tell; text; end       
   def whatever(n, _); tell*n; end
   

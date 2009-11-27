@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/database'
+
 
 class SimpleJob
   cattr_accessor :runs; self.runs = 0
@@ -153,9 +153,11 @@ describe Delayed::Job do
     Delayed::Job.destroy_failed_jobs = false
 
     @job = Delayed::Job.create :payload_object => SimpleJob.new, :attempts => 50
-    @job.reload.failed_at.should == nil
+    @job = Delayed::Job.find(@job.id)
+    @job.failed_at.should == nil
     @job.reschedule 'FAIL'
-    @job.reload.failed_at.should_not == nil
+    @job = Delayed::Job.find(@job.id)
+    @job.failed_at.should_not == nil
 
     Delayed::Job.destroy_failed_jobs = default
   end

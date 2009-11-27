@@ -1,5 +1,3 @@
-require File.dirname(__FILE__) + '/database'
-
 describe "A story" do
 
   before(:all) do
